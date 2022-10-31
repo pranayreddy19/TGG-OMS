@@ -1,5 +1,6 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,8 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="journey_lookup")
-public class JourneyLookup {
+@Table(name="journey_lookup", schema="oms")
+public class JourneyLookup implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")
@@ -28,10 +34,10 @@ public class JourneyLookup {
 	private Integer maxSplitCount;
 	
 	@Column(name = "edit")
-	private boolean edit;
+	private Boolean edit;
 	
 	@Column(name = "split")
-	private boolean split;
+	private Boolean split;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -69,19 +75,19 @@ public class JourneyLookup {
 		this.maxSplitCount = maxSplitCount;
 	}
 
-	public boolean isEdit() {
+	public Boolean isEdit() {
 		return edit;
 	}
 
-	public void setEdit(boolean edit) {
+	public void setEdit(Boolean edit) {
 		this.edit = edit;
 	}
 
-	public boolean isSplit() {
+	public Boolean isSplit() {
 		return split;
 	}
 
-	public void setSplit(boolean split) {
+	public void setSplit(Boolean split) {
 		this.split = split;
 	}
 

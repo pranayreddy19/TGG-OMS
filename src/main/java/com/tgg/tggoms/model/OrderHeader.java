@@ -18,28 +18,25 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.type.UUIDCharType;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="order_header", schema="oms")
+@Table(name="order_header", schema ="oms" )
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@TypeDef(
-		  name = "uuid-char",
-		  defaultForType = UUID.class,
-		  typeClass = UUIDCharType.class
-		)
 public class OrderHeader implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-//	@Type(type="pg-uuid")
 	@Column(name = "order_id")
 	private UUID orderId;
 	
-//	@Type(type="pg-uuid")
 	@Column(name = "customer_id")
 	private UUID customerId;
 	
@@ -87,11 +84,11 @@ public class OrderHeader implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "delivery_address", columnDefinition = "jsonb")
-	private String deliveryAddress;
+	private Object deliveryAddress;
 	
 	@Type(type = "jsonb")
 	@Column(name = "order_notes", columnDefinition = "jsonb")
-	private String orderNotes;
+	private Object orderNotes;
 	
 	@Column(name = "order_source")
 	private String orderSource;
@@ -104,19 +101,19 @@ public class OrderHeader implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "order_info", columnDefinition = "jsonb")
-	private String orderInfo;
+	private Object orderInfo;
 	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Invoice> invoice;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderAllocationHeader> orderAllocationHeader;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderLines> orderLines;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Shipment> shipment;
+//	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Invoice> invoice;
+//	
+//	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<OrderAllocationHeader> orderAllocationHeader;
+//	
+//	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<OrderLines> orderLines;
+//	
+//	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Shipment> shipment;
 
 	public UUID getOrderId() {
 		return orderId;
@@ -246,19 +243,19 @@ public class OrderHeader implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public String getDeliveryAddress() {
+	public Object getDeliveryAddress() {
 		return deliveryAddress;
 	}
 
-	public void setDeliveryAddress(String deliveryAddress) {
+	public void setDeliveryAddress(Object deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
 	}
 
-	public String getOrderNotes() {
+	public Object getOrderNotes() {
 		return orderNotes;
 	}
 
-	public void setOrderNotes(String orderNotes) {
+	public void setOrderNotes(Object orderNotes) {
 		this.orderNotes = orderNotes;
 	}
 
@@ -286,45 +283,45 @@ public class OrderHeader implements Serializable {
 		this.deliveryAddressId = deliveryAddressId;
 	}
 
-	public String getOrderInfo() {
+	public Object getOrderInfo() {
 		return orderInfo;
 	}
 
-	public void setOrderInfo(String orderInfo) {
+	public void setOrderInfo(Object orderInfo) {
 		this.orderInfo = orderInfo;
 	}
 
-	public List<Invoice> getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(List<Invoice> invoice) {
-		this.invoice = invoice;
-	}
-
-	public List<OrderAllocationHeader> getOrderAllocationHeader() {
-		return orderAllocationHeader;
-	}
-
-	public void setOrderAllocationHeader(List<OrderAllocationHeader> orderAllocationHeader) {
-		this.orderAllocationHeader = orderAllocationHeader;
-	}
-
-	public List<OrderLines> getOrderLines() {
-		return orderLines;
-	}
-
-	public void setOrderLines(List<OrderLines> orderLines) {
-		this.orderLines = orderLines;
-	}
-
-	public List<Shipment> getShipment() {
-		return shipment;
-	}
-
-	public void setShipment(List<Shipment> shipment) {
-		this.shipment = shipment;
-	}
+//	public List<Invoice> getInvoice() {
+//		return invoice;
+//	}
+//
+//	public void setInvoice(List<Invoice> invoice) {
+//		this.invoice = invoice;
+//	}
+//
+//	public List<OrderAllocationHeader> getOrderAllocationHeader() {
+//		return orderAllocationHeader;
+//	}
+//
+//	public void setOrderAllocationHeader(List<OrderAllocationHeader> orderAllocationHeader) {
+//		this.orderAllocationHeader = orderAllocationHeader;
+//	}
+//
+//	public List<OrderLines> getOrderLines() {
+//		return orderLines;
+//	}
+//
+//	public void setOrderLines(List<OrderLines> orderLines) {
+//		this.orderLines = orderLines;
+//	}
+//
+//	public List<Shipment> getShipment() {
+//		return shipment;
+//	}
+//
+//	public void setShipment(List<Shipment> shipment) {
+//		this.shipment = shipment;
+//	}
 	
 	
 	

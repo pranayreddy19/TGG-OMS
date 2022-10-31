@@ -17,9 +17,14 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="order_processing")
+@Table(name="order_processing", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class OrderProcessing implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -43,7 +48,7 @@ public class OrderProcessing implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "detail_json", columnDefinition = "jsonb")
-	private String detailJson;
+	private Object detailJson;
 	
 	@Column(name = "date_created", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime dateCreated;
@@ -96,11 +101,11 @@ public class OrderProcessing implements Serializable {
 		this.processFlag = processFlag;
 	}
 
-	public String getDetailJson() {
+	public Object getDetailJson() {
 		return detailJson;
 	}
 
-	public void setDetailJson(String detailJson) {
+	public void setDetailJson(Object detailJson) {
 		this.detailJson = detailJson;
 	}
 

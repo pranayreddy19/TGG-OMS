@@ -9,6 +9,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ServiceConfig implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="app_name")
 	private String appName;
 	

@@ -1,13 +1,20 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="app_service_configurations")
-public class AppServiceConfigurations {
+@Table(name="app_service_configurations", schema="oms")
+public class AppServiceConfigurations implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
 	private ServiceConfig serviceConfig;

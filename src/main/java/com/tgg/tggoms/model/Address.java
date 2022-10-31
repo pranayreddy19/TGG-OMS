@@ -2,18 +2,14 @@ package com.tgg.tggoms.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -23,10 +19,15 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="address")
+@Table(name="address", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Address implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -68,7 +69,7 @@ public class Address implements Serializable {
 	private String postCode;
 	
 	@Column(name = "is_active")
-	private boolean isActive;
+	private Boolean isActive;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -84,10 +85,10 @@ public class Address implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "detail", columnDefinition = "jsonb")
-	private String detail;
+	private Object detail;
 	
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Package> packages;
+//	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Packages> packages;
 
 	public UUID getAddressId() {
 		return addressId;
@@ -185,11 +186,11 @@ public class Address implements Serializable {
 		this.postCode = postCode;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 
@@ -225,21 +226,21 @@ public class Address implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public String getDetail() {
+	public Object getDetail() {
 		return detail;
 	}
 
-	public void setDetail(String detail) {
+	public void setDetail(Object detail) {
 		this.detail = detail;
 	}
 
-	public List<Package> getPackages() {
-		return packages;
-	}
-
-	public void setPackages(List<Package> packages) {
-		this.packages = packages;
-	}
+//	public List<Packages> getPackages() {
+//		return packages;
+//	}
+//
+//	public void setPackages(List<Packages> packages) {
+//		this.packages = packages;
+//	}
 	
 	
 

@@ -24,10 +24,15 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="order_lines")
+@Table(name="order_lines", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class OrderLines implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -58,7 +63,7 @@ public class OrderLines implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "line_details", columnDefinition = "jsonb")
-	private String lineDetails;
+	private Object lineDetails;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -75,14 +80,14 @@ public class OrderLines implements Serializable {
 	@Column(name = "line_status")
 	private String lineStatus;
 	
-	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderAllocationLines> orderAllocationLines;
-	
-	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderLinesDiscount> orderLinesDiscount;
-	
-	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<ProductService> productService;
+//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<OrderAllocationLines> orderAllocationLines;
+//	
+//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<OrderLinesDiscount> orderLinesDiscount;
+//	
+//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<ProductService> productService;
 	
 	public OrderHeader getOrderHeader() {
 		return orderHeader;
@@ -126,10 +131,10 @@ public class OrderLines implements Serializable {
 	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
-	public String getLineDetails() {
+	public Object getLineDetails() {
 		return lineDetails;
 	}
-	public void setLineDetails(String lineDetails) {
+	public void setLineDetails(Object lineDetails) {
 		this.lineDetails = lineDetails;
 	}
 	public LocalDateTime getCreatedAt() {
@@ -168,24 +173,24 @@ public class OrderLines implements Serializable {
 	public void setLineId(UUID lineId) {
 		this.lineId = lineId;
 	}
-	public List<OrderAllocationLines> getOrderAllocationLines() {
-		return orderAllocationLines;
-	}
-	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
-		this.orderAllocationLines = orderAllocationLines;
-	}
-	public List<OrderLinesDiscount> getOrderLinesDiscount() {
-		return orderLinesDiscount;
-	}
-	public void setOrderLinesDiscount(List<OrderLinesDiscount> orderLinesDiscount) {
-		this.orderLinesDiscount = orderLinesDiscount;
-	}
-	public List<ProductService> getProductService() {
-		return productService;
-	}
-	public void setProductService(List<ProductService> productService) {
-		this.productService = productService;
-	}
+//	public List<OrderAllocationLines> getOrderAllocationLines() {
+//		return orderAllocationLines;
+//	}
+//	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
+//		this.orderAllocationLines = orderAllocationLines;
+//	}
+//	public List<OrderLinesDiscount> getOrderLinesDiscount() {
+//		return orderLinesDiscount;
+//	}
+//	public void setOrderLinesDiscount(List<OrderLinesDiscount> orderLinesDiscount) {
+//		this.orderLinesDiscount = orderLinesDiscount;
+//	}
+//	public List<ProductService> getProductService() {
+//		return productService;
+//	}
+//	public void setProductService(List<ProductService> productService) {
+//		this.productService = productService;
+//	}
 	
 	
 

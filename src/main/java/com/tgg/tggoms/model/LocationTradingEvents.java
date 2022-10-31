@@ -1,5 +1,6 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,8 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="location_trading_events")
-public class LocationTradingEvents {
+@Table(name="location_trading_events", schema="oms")
+public class LocationTradingEvents implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")

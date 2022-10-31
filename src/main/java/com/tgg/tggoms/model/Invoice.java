@@ -23,10 +23,15 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="invoice")
+@Table(name="invoice", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Invoice implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -50,7 +55,7 @@ public class Invoice implements Serializable{
 	
 	@Type(type = "jsonb")
 	@Column(name = "invoice_details", columnDefinition = "jsonb")
-	private String invoiceDetails;
+	private Object invoiceDetails;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -107,11 +112,11 @@ public class Invoice implements Serializable{
 		this.invoiceDate = invoiceDate;
 	}
 
-	public String getInvoiceDetails() {
+	public Object getInvoiceDetails() {
 		return invoiceDetails;
 	}
 
-	public void setInvoiceDetails(String invoiceDetails) {
+	public void setInvoiceDetails(Object invoiceDetails) {
 		this.invoiceDetails = invoiceDetails;
 	}
 

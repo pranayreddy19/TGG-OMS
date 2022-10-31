@@ -19,10 +19,15 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="parcel")
+@Table(name="parcel", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Parcel implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -50,11 +55,11 @@ public class Parcel implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="pkg_id")
-	private Package packages;
+	private Packages packages;
 	
 	@Type(type = "jsonb")
 	@Column(name = "dimension_details", columnDefinition = "jsonb")
-	private String dimensionDetails;
+	private Object dimensionDetails;
 	
 	@Column(name = "unit_of_measure")
 	private String unitOfMeasure;
@@ -121,19 +126,19 @@ public class Parcel implements Serializable {
 		this.parcelStatus = parcelStatus;
 	}
 
-	public Package getPackages() {
+	public Packages getPackages() {
 		return packages;
 	}
 
-	public void setPackages(Package packages) {
+	public void setPackages(Packages packages) {
 		this.packages = packages;
 	}
 
-	public String getDimensionDetails() {
+	public Object getDimensionDetails() {
 		return dimensionDetails;
 	}
 
-	public void setDimensionDetails(String dimensionDetails) {
+	public void setDimensionDetails(Object dimensionDetails) {
 		this.dimensionDetails = dimensionDetails;
 	}
 

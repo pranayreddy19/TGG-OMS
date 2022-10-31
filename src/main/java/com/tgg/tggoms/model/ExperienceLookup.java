@@ -1,5 +1,6 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,8 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "experience_lookup")
-public class ExperienceLookup {
+@Table(name = "experience_lookup", schema="oms")
+public class ExperienceLookup implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")
@@ -49,7 +55,7 @@ public class ExperienceLookup {
 	private String supProdNumber;
 	
 	@Column(name = "is_default")
-	private boolean isDefault;
+	private Boolean isDefault;
 	
 	@Column(name = "experience_short_desc")
 	private String experienceShortDesc;
@@ -134,11 +140,11 @@ public class ExperienceLookup {
 		this.supProdNumber = supProdNumber;
 	}
 
-	public boolean isDefault() {
+	public Boolean isDefault() {
 		return isDefault;
 	}
 
-	public void setDefault(boolean isDefault) {
+	public void setDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 

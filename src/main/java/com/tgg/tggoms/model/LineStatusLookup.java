@@ -1,5 +1,6 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -12,8 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="line_status_lookup")
-public class LineStatusLookup {
+@Table(name="line_status_lookup", schema="oms")
+public class LineStatusLookup implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")

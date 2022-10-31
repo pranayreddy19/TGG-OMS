@@ -17,10 +17,15 @@ import org.hibernate.annotations.TypeDef;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
-@Table(name="pos_reference_lookup")
+@Table(name="pos_reference_lookup", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class PosReferenceLookup implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -41,7 +46,7 @@ public class PosReferenceLookup implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "pos_data", columnDefinition = "jsonb")
-	private String posData;
+	private Object posData;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -95,11 +100,11 @@ public class PosReferenceLookup implements Serializable {
 		this.referenceValue = referenceValue;
 	}
 
-	public String getPosData() {
+	public Object getPosData() {
 		return posData;
 	}
 
-	public void setPosData(String posData) {
+	public void setPosData(Object posData) {
 		this.posData = posData;
 	}
 

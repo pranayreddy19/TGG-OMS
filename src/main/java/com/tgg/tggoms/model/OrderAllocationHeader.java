@@ -1,26 +1,28 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="order_allocation_header")
-public class OrderAllocationHeader {
+@Table(name="order_allocation_header", schema="oms")
+public class OrderAllocationHeader implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -44,7 +46,7 @@ public class OrderAllocationHeader {
 	private LocalDateTime requestedDeliveryDate;
 	
 	@Column(name = "atl")
-	private boolean atl;
+	private Boolean atl;
 	
 	@Column(name = "total_amt")
 	private BigDecimal totalAmt;
@@ -77,7 +79,7 @@ public class OrderAllocationHeader {
 	private String fulfilmentProvider;
 	
 	@Column(name = "package_wrap")
-	private boolean packageWrap;
+	private Boolean packageWrap;
 	
 	@Column(name = "lead_date_time", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime leadDateTime;
@@ -85,14 +87,14 @@ public class OrderAllocationHeader {
 	@Column(name = "picking_sla_time", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime pickingSlaTime;
 	
-	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderAllocationLines> orderAllocationLines;
-	
-	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Package> packages;
-	
-	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Shipment> shipment;
+//	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<OrderAllocationLines> orderAllocationLines;
+//	
+//	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Package> packages;
+//	
+//	@OneToMany(mappedBy = "orderAllocationHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	private List<Shipment> shipment;
 
 	public UUID getAllocationId() {
 		return allocationId;
@@ -142,11 +144,11 @@ public class OrderAllocationHeader {
 		this.requestedDeliveryDate = requestedDeliveryDate;
 	}
 
-	public boolean isAtl() {
+	public Boolean isAtl() {
 		return atl;
 	}
 
-	public void setAtl(boolean atl) {
+	public void setAtl(Boolean atl) {
 		this.atl = atl;
 	}
 
@@ -230,11 +232,11 @@ public class OrderAllocationHeader {
 		this.fulfilmentProvider = fulfilmentProvider;
 	}
 
-	public boolean isPackageWrap() {
+	public Boolean isPackageWrap() {
 		return packageWrap;
 	}
 
-	public void setPackageWrap(boolean packageWrap) {
+	public void setPackageWrap(Boolean packageWrap) {
 		this.packageWrap = packageWrap;
 	}
 
@@ -254,29 +256,29 @@ public class OrderAllocationHeader {
 		this.pickingSlaTime = pickingSlaTime;
 	}
 
-	public List<OrderAllocationLines> getOrderAllocationLines() {
-		return orderAllocationLines;
-	}
-
-	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
-		this.orderAllocationLines = orderAllocationLines;
-	}
-
-	public List<Package> getPackages() {
-		return packages;
-	}
-
-	public void setPackages(List<Package> packages) {
-		this.packages = packages;
-	}
-
-	public List<Shipment> getShipment() {
-		return shipment;
-	}
-
-	public void setShipment(List<Shipment> shipment) {
-		this.shipment = shipment;
-	}
-	
+//	public List<OrderAllocationLines> getOrderAllocationLines() {
+//		return orderAllocationLines;
+//	}
+//
+//	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
+//		this.orderAllocationLines = orderAllocationLines;
+//	}
+//
+//	public List<Package> getPackages() {
+//		return packages;
+//	}
+//
+//	public void setPackages(List<Package> packages) {
+//		this.packages = packages;
+//	}
+//
+//	public List<Shipment> getShipment() {
+//		return shipment;
+//	}
+//
+//	public void setShipment(List<Shipment> shipment) {
+//		this.shipment = shipment;
+//	}
+//	
 	
 }

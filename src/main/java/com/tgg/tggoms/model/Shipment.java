@@ -1,5 +1,6 @@
 package com.tgg.tggoms.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,8 +21,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="shipment")
-public class Shipment {
+@Table(name="shipment", schema="oms")
+public class Shipment implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(generator = "uuid2")
@@ -81,7 +87,7 @@ public class Shipment {
 	private List<Invoice> invoice;
 	
 	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Package> packages;
+	private List<Packages> packages;
 
 	public UUID getShipmentId() {
 		return shipmentId;
@@ -219,11 +225,11 @@ public class Shipment {
 		this.invoice = invoice;
 	}
 
-	public List<Package> getPackages() {
+	public List<Packages> getPackages() {
 		return packages;
 	}
 
-	public void setPackages(List<Package> packages) {
+	public void setPackages(List<Packages> packages) {
 		this.packages = packages;
 	}
 	
