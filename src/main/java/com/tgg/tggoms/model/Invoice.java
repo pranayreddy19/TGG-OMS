@@ -20,11 +20,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="invoice", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "invoiceId")
 public class Invoice implements Serializable{
 	
 	/**
@@ -40,14 +43,17 @@ public class Invoice implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
+//	@Column(name = "order_id")
 	private OrderHeader orderHeader;
 	
 	@ManyToOne
 	@JoinColumn(name="shipment_id")
+//	@Column(name = "shipment_id")
 	private Shipment shipment;
 	
 	@ManyToOne
 	@JoinColumn(name="invoice_status_code")
+//	@Column(name = "invoice_status_code")
 	private InvoiceStatus invoiceStatus;
 	
 	@Column(name = "invoice_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")

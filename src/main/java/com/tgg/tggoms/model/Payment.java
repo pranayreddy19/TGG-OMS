@@ -15,8 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="payment", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "paymentId")
 public class Payment implements Serializable {
 	
 	/**
@@ -32,13 +36,14 @@ public class Payment implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="invoice_id")
+//	@Column(name = "invoice_id")
 	private Invoice invoice;
 	
 	@Column(name = "payment_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime paymentDate;
 	
-	@Column(name = "payment_amount")
-	private BigDecimal paymentAmount;
+//	@Column(name = "payment_amount")
+//	private BigDecimal paymentAmount;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -76,13 +81,13 @@ public class Payment implements Serializable {
 		this.paymentDate = paymentDate;
 	}
 
-	public BigDecimal getPaymentAmount() {
-		return paymentAmount;
-	}
-
-	public void setPaymentAmount(BigDecimal paymentAmount) {
-		this.paymentAmount = paymentAmount;
-	}
+//	public BigDecimal getPaymentAmount() {
+//		return paymentAmount;
+//	}
+//
+//	public void setPaymentAmount(BigDecimal paymentAmount) {
+//		this.paymentAmount = paymentAmount;
+//	}
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

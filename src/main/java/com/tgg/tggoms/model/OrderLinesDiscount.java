@@ -15,8 +15,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="order_lines_discount", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "LineDiscId")
 public class OrderLinesDiscount implements Serializable {
 	
 	/**
@@ -32,13 +36,14 @@ public class OrderLinesDiscount implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="line_id")
+//	@Column(name = "line_id")
 	private OrderLines orderLines;
 	
 	@Column(name = "discount_code")
 	private String discountCode;
 	
-	@Column(name = "total_amt")
-	private BigDecimal totalAmt;
+//	@Column(name = "total_amt")
+//	private BigDecimal totalAmt;
 	
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
@@ -76,13 +81,13 @@ public class OrderLinesDiscount implements Serializable {
 		this.discountCode = discountCode;
 	}
 
-	public BigDecimal getTotalAmt() {
-		return totalAmt;
-	}
-
-	public void setTotalAmt(BigDecimal totalAmt) {
-		this.totalAmt = totalAmt;
-	}
+//	public BigDecimal getTotalAmt() {
+//		return totalAmt;
+//	}
+//
+//	public void setTotalAmt(BigDecimal totalAmt) {
+//		this.totalAmt = totalAmt;
+//	}
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

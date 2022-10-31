@@ -1,7 +1,6 @@
 package com.tgg.tggoms.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -21,11 +20,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="order_lines", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "lineId")
 public class OrderLines implements Serializable {
 	
 	/**
@@ -41,6 +43,7 @@ public class OrderLines implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
+//	@Column(name = "order_id")
 	private OrderHeader orderHeader;
 	
 	@Column(name = "line_nbr")
@@ -55,8 +58,8 @@ public class OrderLines implements Serializable {
 	@Column(name = "prod_qty")
 	private double prodQty;
 	
-	@Column(name = "total_amt")
-	private BigDecimal totalAmt;
+//	@Column(name = "total_amt")
+//	private BigDecimal totalAmt;
 	
 	@Column(name = "channel_id")
 	private String channelId;
@@ -80,14 +83,15 @@ public class OrderLines implements Serializable {
 	@Column(name = "line_status")
 	private String lineStatus;
 	
-//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<OrderAllocationLines> orderAllocationLines;
-//	
-//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<OrderLinesDiscount> orderLinesDiscount;
-//	
-//	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<ProductService> productService;
+//	@JsonManagedReference
+	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrderAllocationLines> orderAllocationLines;
+	
+	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrderLinesDiscount> orderLinesDiscount;
+	
+	@OneToMany(mappedBy = "orderLines", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ProductService> productService;
 	
 	public OrderHeader getOrderHeader() {
 		return orderHeader;
@@ -119,12 +123,12 @@ public class OrderLines implements Serializable {
 	public void setProdQty(double prodQty) {
 		this.prodQty = prodQty;
 	}
-	public BigDecimal getTotalAmt() {
-		return totalAmt;
-	}
-	public void setTotalAmt(BigDecimal totalAmt) {
-		this.totalAmt = totalAmt;
-	}
+//	public BigDecimal getTotalAmt() {
+//		return totalAmt;
+//	}
+//	public void setTotalAmt(BigDecimal totalAmt) {
+//		this.totalAmt = totalAmt;
+//	}
 	public String getChannelId() {
 		return channelId;
 	}
@@ -173,24 +177,24 @@ public class OrderLines implements Serializable {
 	public void setLineId(UUID lineId) {
 		this.lineId = lineId;
 	}
-//	public List<OrderAllocationLines> getOrderAllocationLines() {
-//		return orderAllocationLines;
-//	}
-//	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
-//		this.orderAllocationLines = orderAllocationLines;
-//	}
-//	public List<OrderLinesDiscount> getOrderLinesDiscount() {
-//		return orderLinesDiscount;
-//	}
-//	public void setOrderLinesDiscount(List<OrderLinesDiscount> orderLinesDiscount) {
-//		this.orderLinesDiscount = orderLinesDiscount;
-//	}
-//	public List<ProductService> getProductService() {
-//		return productService;
-//	}
-//	public void setProductService(List<ProductService> productService) {
-//		this.productService = productService;
-//	}
+	public List<OrderAllocationLines> getOrderAllocationLines() {
+		return orderAllocationLines;
+	}
+	public void setOrderAllocationLines(List<OrderAllocationLines> orderAllocationLines) {
+		this.orderAllocationLines = orderAllocationLines;
+	}
+	public List<OrderLinesDiscount> getOrderLinesDiscount() {
+		return orderLinesDiscount;
+	}
+	public void setOrderLinesDiscount(List<OrderLinesDiscount> orderLinesDiscount) {
+		this.orderLinesDiscount = orderLinesDiscount;
+	}
+	public List<ProductService> getProductService() {
+		return productService;
+	}
+	public void setProductService(List<ProductService> productService) {
+		this.productService = productService;
+	}
 	
 	
 

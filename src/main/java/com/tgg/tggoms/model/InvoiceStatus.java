@@ -16,8 +16,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="invoice_status", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "invoiceStatusCode")
 public class InvoiceStatus implements Serializable {
 	
 	/**

@@ -2,25 +2,32 @@ package com.tgg.tggoms.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="address", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
 public class Address implements Serializable {
 	
 	/**
@@ -36,6 +43,7 @@ public class Address implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="customer_id")
+//	@Column(name = "customer_id")
 	private Customers customers;
 	
 	@Column(name = "address_type")
@@ -87,8 +95,8 @@ public class Address implements Serializable {
 	@Column(name = "detail", columnDefinition = "jsonb")
 	private Object detail;
 	
-//	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private List<Packages> packages;
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Packages> packages;
 
 	public UUID getAddressId() {
 		return addressId;
@@ -234,13 +242,13 @@ public class Address implements Serializable {
 		this.detail = detail;
 	}
 
-//	public List<Packages> getPackages() {
-//		return packages;
-//	}
-//
-//	public void setPackages(List<Packages> packages) {
-//		this.packages = packages;
-//	}
+	public List<Packages> getPackages() {
+		return packages;
+	}
+
+	public void setPackages(List<Packages> packages) {
+		this.packages = packages;
+	}
 	
 	
 

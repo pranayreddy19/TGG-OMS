@@ -16,11 +16,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="parcel", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "parcelId")
 public class Parcel implements Serializable {
 	
 	/**
@@ -48,13 +51,14 @@ public class Parcel implements Serializable {
 	
 	@Type(type = "jsonb")
 	@Column(name = "line_details", columnDefinition = "jsonb")
-	private String lineDetails;
+	private Object lineDetails;
 	
 	@Column(name = "parcel_status")
 	private String parcelStatus;
 	
 	@ManyToOne
 	@JoinColumn(name="pkg_id")
+//	@Column(name = "pkg_id")
 	private Packages packages;
 	
 	@Type(type = "jsonb")
@@ -110,11 +114,11 @@ public class Parcel implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public String getLineDetails() {
+	public Object getLineDetails() {
 		return lineDetails;
 	}
 
-	public void setLineDetails(String lineDetails) {
+	public void setLineDetails(Object lineDetails) {
 		this.lineDetails = lineDetails;
 	}
 

@@ -20,8 +20,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="shipment", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "shipmentId")
 public class Shipment implements Serializable {
 	
 	/**
@@ -37,6 +41,7 @@ public class Shipment implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
+//	@Column(name = "order_id")
 	private OrderHeader orderHeader;
 	
 	@Column(name = "consignment_number")
@@ -69,13 +74,14 @@ public class Shipment implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="allocation_id")
+//	@Column(name = "allocation_id")
 	private OrderAllocationHeader orderAllocationHeader;
 	
 	@Column(name = "despatch_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime despatchDate;
 	
-	@Column(name = "cost")
-	private BigDecimal cost;
+//	@Column(name = "cost")
+//	private BigDecimal cost;
 	
 	@Column(name = "shipment_journey")
 	private String shipmentJourney;
@@ -193,13 +199,13 @@ public class Shipment implements Serializable {
 		this.despatchDate = despatchDate;
 	}
 
-	public BigDecimal getCost() {
-		return cost;
-	}
-
-	public void setCost(BigDecimal cost) {
-		this.cost = cost;
-	}
+//	public BigDecimal getCost() {
+//		return cost;
+//	}
+//
+//	public void setCost(BigDecimal cost) {
+//		this.cost = cost;
+//	}
 
 	public String getShipmentJourney() {
 		return shipmentJourney;

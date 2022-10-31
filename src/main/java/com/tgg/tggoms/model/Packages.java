@@ -18,8 +18,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="package", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "pkgId")
 public class Packages implements Serializable {
 	
 	/**
@@ -35,6 +39,7 @@ public class Packages implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="address_id")
+//	@Column(name = "address_id")
 	private Address address;
 	
 	@Column(name = "pkg_status")
@@ -57,6 +62,7 @@ public class Packages implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="shipment_id")
+//	@Column(name = "shipment_id")
 	private Shipment shipment;
 	
 	@Column(name = "journey_id")
@@ -70,6 +76,7 @@ public class Packages implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="allocation_id")
+//	@Column(name = "allocation_id")
 	private OrderAllocationHeader orderAllocationHeader;
 	
 	@Column(name = "transaction_id")

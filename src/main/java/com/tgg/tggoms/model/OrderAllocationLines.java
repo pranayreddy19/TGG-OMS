@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,8 +15,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="order_allocation_lines", schema="oms")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "allocationLineId")
 public class OrderAllocationLines implements Serializable {
 	
 	/**
@@ -31,14 +37,16 @@ public class OrderAllocationLines implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="line_id")
+//	@Column(name = "line_id")
 	private OrderLines orderLines;
 	
 	@ManyToOne
 	@JoinColumn(name="allocation_id")
+//	@Column(name = "allocation_id")
 	private OrderAllocationHeader orderAllocationHeader; 
 	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime createdAt;
+//	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime createdAt;
 	
 	@Column(name = "created_by")
 	private String createdBy;
@@ -50,7 +58,7 @@ public class OrderAllocationLines implements Serializable {
 	private String modifiedBy;
 	
 	@Column(name = "picked_qty")
-	private double pickedQty;
+	private Double pickedQty;
 	
 	@Column(name = "fulfilment_line_status")
 	private String fulfilmentLineStatus;
@@ -62,7 +70,7 @@ public class OrderAllocationLines implements Serializable {
 	private String fulfilmentProvider;
 	
 	@Column(name = "packed_qty")
-	private double packedQty;
+	private Double packedQty;
 
 	public UUID getAllocationLineId() {
 		return allocationLineId;
@@ -88,13 +96,13 @@ public class OrderAllocationLines implements Serializable {
 		this.orderAllocationHeader = orderAllocationHeader;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+//	public LocalDateTime getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
 
 	public String getCreatedBy() {
 		return createdBy;
@@ -120,11 +128,11 @@ public class OrderAllocationLines implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public double getPickedQty() {
+	public Double getPickedQty() {
 		return pickedQty;
 	}
 
-	public void setPickedQty(double pickedQty) {
+	public void setPickedQty(Double pickedQty) {
 		this.pickedQty = pickedQty;
 	}
 
@@ -152,11 +160,11 @@ public class OrderAllocationLines implements Serializable {
 		this.fulfilmentProvider = fulfilmentProvider;
 	}
 
-	public double getPackedQty() {
+	public Double getPackedQty() {
 		return packedQty;
 	}
 
-	public void setPackedQty(double packedQty) {
+	public void setPackedQty(Double packedQty) {
 		this.packedQty = packedQty;
 	}
 	

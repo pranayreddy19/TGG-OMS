@@ -16,11 +16,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="product_service", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "serviceId")
 public class ProductService implements Serializable {
 	
 	/**
@@ -36,6 +39,7 @@ public class ProductService implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="line_id")
+//	@Column(name = "line_id")
 	private OrderLines orderLines;
 	
 	@Column(name = "service_type")

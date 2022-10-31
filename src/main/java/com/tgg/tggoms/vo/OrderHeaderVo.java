@@ -1,49 +1,21 @@
-package com.tgg.tggoms.model;
+package com.tgg.tggoms.vo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+public class OrderHeaderVo{
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-
-@Entity
-@Table(name="order_header", schema ="oms" )
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "orderId")
-public class OrderHeader implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "order_id")
 	private UUID orderId;
 	
-	@Column(name = "customer_id")
 	private UUID customerId;
 	
-	@Column(name = "order_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime orderDate;
 	
 //	@Column(name = "total_amount")
@@ -55,68 +27,38 @@ public class OrderHeader implements Serializable {
 //	@Column(name = "despatched_amount")
 //	private BigDecimal despatchedAmount;
 	
-	@Column(name = "request_delivery_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime requestDeliveryDate;
 	
-	@Column(name = "order_status")
 	private String orderStatus;
 	
-	@Column(name = "order_location_nbr")
 	private Integer orderLocationNbr;
 	
-	@Column(name = "order_follow_update", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime orderFollowUpdate;
 	
-	@Column(name = "external_order_reference")
 	private String externalOrderReference;
 	
-	@Column(name = "pos_order_number")
 	private String posOrderNumber;
 	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime createdAt;
 	
-	@Column(name = "created_by")
 	private String createdBy;
 	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime modifiedAt;
 	
-	@Column(name = "modified_by")
 	private String modifiedBy;
 	
-	@Type(type = "jsonb")
-	@Column(name = "delivery_address", columnDefinition = "jsonb")
 	private Object deliveryAddress;
 	
-	@Type(type = "jsonb")
-	@Column(name = "order_notes", columnDefinition = "jsonb")
 	private Object orderNotes;
 	
-	@Column(name = "order_source")
 	private String orderSource;
 	
-	@Column(name = "order_number")
 	private Integer orderNumber;
 	
-	@Column(name = "delivery_address_id")
 	private UUID deliveryAddressId;
 	
-	@Type(type = "jsonb")
-	@Column(name = "order_info", columnDefinition = "jsonb")
 	private Object orderInfo;
 	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Invoice> invoice;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderAllocationHeader> orderAllocationHeader;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<OrderLines> orderLines;
-	
-	@OneToMany(mappedBy = "orderHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Shipment> shipment;
 
 	public UUID getOrderId() {
 		return orderId;
@@ -294,39 +236,44 @@ public class OrderHeader implements Serializable {
 		this.orderInfo = orderInfo;
 	}
 
-	public List<Invoice> getInvoice() {
-		return invoice;
+	public OrderHeaderVo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setInvoice(List<Invoice> invoice) {
-		this.invoice = invoice;
-	}
-
-	public List<OrderAllocationHeader> getOrderAllocationHeader() {
-		return orderAllocationHeader;
-	}
-
-	public void setOrderAllocationHeader(List<OrderAllocationHeader> orderAllocationHeader) {
-		this.orderAllocationHeader = orderAllocationHeader;
-	}
-
-	public List<OrderLines> getOrderLines() {
-		return orderLines;
-	}
-
-	public void setOrderLines(List<OrderLines> orderLines) {
-		this.orderLines = orderLines;
-	}
-
-	public List<Shipment> getShipment() {
-		return shipment;
-	}
-
-	public void setShipment(List<Shipment> shipment) {
-		this.shipment = shipment;
-	}
-	
-	
+//	public List<Invoice> getInvoice() {
+//		return invoice;
+//	}
+//
+//	public void setInvoice(List<Invoice> invoice) {
+//		this.invoice = invoice;
+//	}
+//
+//	public List<OrderAllocationHeader> getOrderAllocationHeader() {
+//		return orderAllocationHeader;
+//	}
+//
+//	public void setOrderAllocationHeader(List<OrderAllocationHeader> orderAllocationHeader) {
+//		this.orderAllocationHeader = orderAllocationHeader;
+//	}
+//
+//	public List<OrderLines> getOrderLines() {
+//		return orderLines;
+//	}
+//
+//	public void setOrderLines(List<OrderLines> orderLines) {
+//		this.orderLines = orderLines;
+//	}
+//
+//	public List<Shipment> getShipment() {
+//		return shipment;
+//	}
+//
+//	public void setShipment(List<Shipment> shipment) {
+//		this.shipment = shipment;
+//	}
+//	
+//	
 	
 
 }
