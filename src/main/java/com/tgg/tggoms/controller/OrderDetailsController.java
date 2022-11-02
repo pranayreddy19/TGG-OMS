@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tgg.tggoms.model.OrderHeader;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.tgg.tggoms.service.OrderDetailsService;
-import com.tgg.tggoms.vo.OrderDetailsVO;
+import com.tgg.tggoms.vo.OrderHeaderVO;
 
 @RestController
 public class OrderDetailsController {
@@ -18,7 +19,7 @@ public class OrderDetailsController {
 	public OrderDetailsService orderDetailsService;
 
 	@GetMapping("/orderdetails/{orderNumber}")
-	public OrderHeader getOrderDetails(@PathVariable @Valid String orderNumber) {
+	public OrderHeaderVO getOrderDetails(@PathVariable @Valid String orderNumber) throws JsonMappingException, JsonProcessingException {
 		return orderDetailsService.getOrderHeader(orderNumber);
 	}
 

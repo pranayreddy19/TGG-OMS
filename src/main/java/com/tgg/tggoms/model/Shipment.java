@@ -1,9 +1,8 @@
 package com.tgg.tggoms.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -15,17 +14,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="shipment", schema="oms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "shipmentId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "shipmentId")
 public class Shipment implements Serializable {
 	
 	/**
@@ -47,30 +48,30 @@ public class Shipment implements Serializable {
 	@Column(name = "consignment_number")
 	private String consignmentNumber;
 	
-	@Column(name = "expected_delivery_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime expectedDeliveryDate;
+//	@Column(name = "expected_delivery_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime expectedDeliveryDate;
 	
-	@Column(name = "actual_despatch_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime actualDespatchDate;
+//	@Column(name = "actual_despatch_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime actualDespatchDate;
 	
 	@Column(name = "status")
 	private String status;
 	
 	@Type(type = "jsonb")
 	@Column(name = "details", columnDefinition = "jsonb")
-	private String details;
+	private Object details;
 	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime createdAt;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime modifiedAt;
-	
-	@Column(name = "modified_by")
-	private String modifiedBy;
+//	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime createdAt;
+//	
+//	@Column(name = "created_by")
+//	private String createdBy;
+//	
+//	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime modifiedAt;
+//	
+//	@Column(name = "modified_by")
+//	private String modifiedBy;
 	
 	@ManyToOne
 	@JoinColumn(name="allocation_id")
@@ -83,17 +84,19 @@ public class Shipment implements Serializable {
 //	@Column(name = "cost")
 //	private BigDecimal cost;
 	
-	@Column(name = "shipment_journey")
-	private String shipmentJourney;
+//	@Column(name = "shipment_journey")
+//	private String shipmentJourney;
 	
-	@Column(name = "shipment_courier")
-	private String shipmentCourier;
+//	@Column(name = "shipment_courier")
+//	private String shipmentCourier;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Invoice> invoice;
+	private Set<Invoice> invoice;
 	
-	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Packages> packages;
+	
+	@OneToOne(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Packages packages;
 
 	public UUID getShipmentId() {
 		return shipmentId;
@@ -119,21 +122,21 @@ public class Shipment implements Serializable {
 		this.consignmentNumber = consignmentNumber;
 	}
 
-	public LocalDateTime getExpectedDeliveryDate() {
-		return expectedDeliveryDate;
-	}
-
-	public void setExpectedDeliveryDate(LocalDateTime expectedDeliveryDate) {
-		this.expectedDeliveryDate = expectedDeliveryDate;
-	}
-
-	public LocalDateTime getActualDespatchDate() {
-		return actualDespatchDate;
-	}
-
-	public void setActualDespatchDate(LocalDateTime actualDespatchDate) {
-		this.actualDespatchDate = actualDespatchDate;
-	}
+//	public LocalDateTime getExpectedDeliveryDate() {
+//		return expectedDeliveryDate;
+//	}
+//
+//	public void setExpectedDeliveryDate(LocalDateTime expectedDeliveryDate) {
+//		this.expectedDeliveryDate = expectedDeliveryDate;
+//	}
+//
+//	public LocalDateTime getActualDespatchDate() {
+//		return actualDespatchDate;
+//	}
+//
+//	public void setActualDespatchDate(LocalDateTime actualDespatchDate) {
+//		this.actualDespatchDate = actualDespatchDate;
+//	}
 
 	public String getStatus() {
 		return status;
@@ -143,45 +146,45 @@ public class Shipment implements Serializable {
 		this.status = status;
 	}
 
-	public String getDetails() {
+	public Object getDetails() {
 		return details;
 	}
 
-	public void setDetails(String details) {
+	public void setDetails(Object details) {
 		this.details = details;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
-	}
-
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+//	public LocalDateTime getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
+//
+//	public String getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(String createdBy) {
+//		this.createdBy = createdBy;
+//	}
+//
+//	public LocalDateTime getModifiedAt() {
+//		return modifiedAt;
+//	}
+//
+//	public void setModifiedAt(LocalDateTime modifiedAt) {
+//		this.modifiedAt = modifiedAt;
+//	}
+//
+//	public String getModifiedBy() {
+//		return modifiedBy;
+//	}
+//
+//	public void setModifiedBy(String modifiedBy) {
+//		this.modifiedBy = modifiedBy;
+//	}
 
 	public OrderAllocationHeader getOrderAllocationHeader() {
 		return orderAllocationHeader;
@@ -207,35 +210,35 @@ public class Shipment implements Serializable {
 //		this.cost = cost;
 //	}
 
-	public String getShipmentJourney() {
-		return shipmentJourney;
-	}
+//	public String getShipmentJourney() {
+//		return shipmentJourney;
+//	}
+//
+//	public void setShipmentJourney(String shipmentJourney) {
+//		this.shipmentJourney = shipmentJourney;
+//	}
+//
+//	public String getShipmentCourier() {
+//		return shipmentCourier;
+//	}
+//
+//	public void setShipmentCourier(String shipmentCourier) {
+//		this.shipmentCourier = shipmentCourier;
+//	}
 
-	public void setShipmentJourney(String shipmentJourney) {
-		this.shipmentJourney = shipmentJourney;
-	}
-
-	public String getShipmentCourier() {
-		return shipmentCourier;
-	}
-
-	public void setShipmentCourier(String shipmentCourier) {
-		this.shipmentCourier = shipmentCourier;
-	}
-
-	public List<Invoice> getInvoice() {
+	public Set<Invoice> getInvoice() {
 		return invoice;
 	}
 
-	public void setInvoice(List<Invoice> invoice) {
+	public void setInvoice(Set<Invoice> invoice) {
 		this.invoice = invoice;
 	}
 
-	public List<Packages> getPackages() {
+	public Packages getPackages() {
 		return packages;
 	}
 
-	public void setPackages(List<Packages> packages) {
+	public void setPackages(Packages packages) {
 		this.packages = packages;
 	}
 	

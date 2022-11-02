@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="payment", schema="oms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "paymentId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "paymentId")
 public class Payment implements Serializable {
 	
 	/**
@@ -39,23 +40,23 @@ public class Payment implements Serializable {
 //	@Column(name = "invoice_id")
 	private Invoice invoice;
 	
-	@Column(name = "payment_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime paymentDate;
-	
-//	@Column(name = "payment_amount")
-//	private BigDecimal paymentAmount;
-	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime createdAt;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime modifiedAt;
-	
-	@Column(name = "modified_by")
-	private String modifiedBy;
+//	@Column(name = "payment_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime paymentDate;
+//	
+////	@Column(name = "payment_amount")
+////	private BigDecimal paymentAmount;
+//	
+//	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime createdAt;
+//	
+//	@Column(name = "created_by")
+//	private String createdBy;
+//	
+//	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime modifiedAt;
+//	
+//	@Column(name = "modified_by")
+//	private String modifiedBy;
 
 	public UUID getPaymentId() {
 		return paymentId;
@@ -73,13 +74,13 @@ public class Payment implements Serializable {
 		this.invoice = invoice;
 	}
 
-	public LocalDateTime getPaymentDate() {
-		return paymentDate;
-	}
-
-	public void setPaymentDate(LocalDateTime paymentDate) {
-		this.paymentDate = paymentDate;
-	}
+//	public LocalDateTime getPaymentDate() {
+//		return paymentDate;
+//	}
+//
+//	public void setPaymentDate(LocalDateTime paymentDate) {
+//		this.paymentDate = paymentDate;
+//	}
 
 //	public BigDecimal getPaymentAmount() {
 //		return paymentAmount;
@@ -89,37 +90,37 @@ public class Payment implements Serializable {
 //		this.paymentAmount = paymentAmount;
 //	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
-	}
-
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+//	public LocalDateTime getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
+//
+//	public String getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(String createdBy) {
+//		this.createdBy = createdBy;
+//	}
+//
+//	public LocalDateTime getModifiedAt() {
+//		return modifiedAt;
+//	}
+//
+//	public void setModifiedAt(LocalDateTime modifiedAt) {
+//		this.modifiedAt = modifiedAt;
+//	}
+//
+//	public String getModifiedBy() {
+//		return modifiedBy;
+//	}
+//
+//	public void setModifiedBy(String modifiedBy) {
+//		this.modifiedBy = modifiedBy;
+//	}
 	
 	
 }

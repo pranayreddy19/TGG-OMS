@@ -1,7 +1,6 @@
 package com.tgg.tggoms.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -16,14 +15,12 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="parcel", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "parcelId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "parcelId")
 public class Parcel implements Serializable {
 	
 	/**
@@ -37,17 +34,17 @@ public class Parcel implements Serializable {
 	@Column(name = "parcel_id")
 	private UUID parcelId;
 	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime createdAt;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime modifiedAt;
-	
-	@Column(name = "modified_by")
-	private String modifiedBy;
+//	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime createdAt;
+//	
+//	@Column(name = "created_by")
+//	private String createdBy;
+//	
+//	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime modifiedAt;
+//	
+//	@Column(name = "modified_by")
+//	private String modifiedBy;
 	
 	@Type(type = "jsonb")
 	@Column(name = "line_details", columnDefinition = "jsonb")
@@ -61,9 +58,9 @@ public class Parcel implements Serializable {
 //	@Column(name = "pkg_id")
 	private Packages packages;
 	
-	@Type(type = "jsonb")
-	@Column(name = "dimension_details", columnDefinition = "jsonb")
-	private Object dimensionDetails;
+//	@Type(type = "jsonb")
+//	@Column(name = "dimension_details", columnDefinition = "jsonb")
+//	private Object dimensionDetails;
 	
 	@Column(name = "unit_of_measure")
 	private String unitOfMeasure;
@@ -82,37 +79,37 @@ public class Parcel implements Serializable {
 		this.parcelId = parcelId;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
-	}
-
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+//	public LocalDateTime getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
+//
+//	public String getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(String createdBy) {
+//		this.createdBy = createdBy;
+//	}
+//
+//	public LocalDateTime getModifiedAt() {
+//		return modifiedAt;
+//	}
+//
+//	public void setModifiedAt(LocalDateTime modifiedAt) {
+//		this.modifiedAt = modifiedAt;
+//	}
+//
+//	public String getModifiedBy() {
+//		return modifiedBy;
+//	}
+//
+//	public void setModifiedBy(String modifiedBy) {
+//		this.modifiedBy = modifiedBy;
+//	}
 
 	public Object getLineDetails() {
 		return lineDetails;
@@ -138,13 +135,13 @@ public class Parcel implements Serializable {
 		this.packages = packages;
 	}
 
-	public Object getDimensionDetails() {
-		return dimensionDetails;
-	}
-
-	public void setDimensionDetails(Object dimensionDetails) {
-		this.dimensionDetails = dimensionDetails;
-	}
+//	public Object getDimensionDetails() {
+//		return dimensionDetails;
+//	}
+//
+//	public void setDimensionDetails(Object dimensionDetails) {
+//		this.dimensionDetails = dimensionDetails;
+//	}
 
 	public String getUnitOfMeasure() {
 		return unitOfMeasure;

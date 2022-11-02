@@ -17,11 +17,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="customers", schema="oms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "customerId")
 public class Customers implements Serializable {
 	
 	/**
@@ -47,17 +48,17 @@ public class Customers implements Serializable {
 	@Column(name = "pos_customer_nbr")
 	private String posCustomerNbr;
 	
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime createdAt;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime modifiedAt;
-	
-	@Column(name = "modified_by")
-	private String modifiedBy;
+//	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime createdAt;
+//	
+//	@Column(name = "created_by")
+//	private String createdBy;
+//	
+//	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime modifiedAt;
+//	
+//	@Column(name = "modified_by")
+//	private String modifiedBy;
 	
 	@Column(name = "cust_reg_name")
 	private String custRegName;
@@ -68,6 +69,7 @@ public class Customers implements Serializable {
 	@Column(name = "cust_type")
 	private String custType;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Address> address;
 
@@ -111,37 +113,37 @@ public class Customers implements Serializable {
 		this.posCustomerNbr = posCustomerNbr;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
-	}
-
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+//	public LocalDateTime getCreatedAt() {
+//		return createdAt;
+//	}
+//
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
+//
+//	public String getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(String createdBy) {
+//		this.createdBy = createdBy;
+//	}
+//
+//	public LocalDateTime getModifiedAt() {
+//		return modifiedAt;
+//	}
+//
+//	public void setModifiedAt(LocalDateTime modifiedAt) {
+//		this.modifiedAt = modifiedAt;
+//	}
+//
+//	public String getModifiedBy() {
+//		return modifiedBy;
+//	}
+//
+//	public void setModifiedBy(String modifiedBy) {
+//		this.modifiedBy = modifiedBy;
+//	}
 
 	public String getCustRegName() {
 		return custRegName;

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="order_allocation_lines", schema="oms")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "allocationLineId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "allocationLineId")
 public class OrderAllocationLines implements Serializable {
 	
 	/**
@@ -48,14 +48,14 @@ public class OrderAllocationLines implements Serializable {
 //	@Column(name = "created_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 //	private LocalDateTime createdAt;
 	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime modifiedAt;
-	
-	@Column(name = "modified_by")
-	private String modifiedBy;
+//	@Column(name = "created_by")
+//	private String createdBy;
+//	
+//	@Column(name = "modified_at", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+//	private LocalDateTime modifiedAt;
+//	
+//	@Column(name = "modified_by")
+//	private String modifiedBy;
 	
 	@Column(name = "picked_qty")
 	private Double pickedQty;
@@ -63,11 +63,11 @@ public class OrderAllocationLines implements Serializable {
 	@Column(name = "fulfilment_line_status")
 	private String fulfilmentLineStatus;
 	
-	@Column(name = "fulfilment_method")
-	private String fulfilmentMethod;
-	
-	@Column(name = "fulfilment_provider")
-	private String fulfilmentProvider;
+//	@Column(name = "fulfilment_method")
+//	private String fulfilmentMethod;
+//	
+//	@Column(name = "fulfilment_provider")
+//	private String fulfilmentProvider;
 	
 	@Column(name = "packed_qty")
 	private Double packedQty;
@@ -104,29 +104,29 @@ public class OrderAllocationLines implements Serializable {
 //		this.createdAt = createdAt;
 //	}
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
-	}
-
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
+//	public String getCreatedBy() {
+//		return createdBy;
+//	}
+//
+//	public void setCreatedBy(String createdBy) {
+//		this.createdBy = createdBy;
+//	}
+//
+//	public LocalDateTime getModifiedAt() {
+//		return modifiedAt;
+//	}
+//
+//	public void setModifiedAt(LocalDateTime modifiedAt) {
+//		this.modifiedAt = modifiedAt;
+//	}
+//
+//	public String getModifiedBy() {
+//		return modifiedBy;
+//	}
+//
+//	public void setModifiedBy(String modifiedBy) {
+//		this.modifiedBy = modifiedBy;
+//	}
 
 	public Double getPickedQty() {
 		return pickedQty;
@@ -144,21 +144,21 @@ public class OrderAllocationLines implements Serializable {
 		this.fulfilmentLineStatus = fulfilmentLineStatus;
 	}
 
-	public String getFulfilmentMethod() {
-		return fulfilmentMethod;
-	}
-
-	public void setFulfilmentMethod(String fulfilmentMethod) {
-		this.fulfilmentMethod = fulfilmentMethod;
-	}
-
-	public String getFulfilmentProvider() {
-		return fulfilmentProvider;
-	}
-
-	public void setFulfilmentProvider(String fulfilmentProvider) {
-		this.fulfilmentProvider = fulfilmentProvider;
-	}
+//	public String getFulfilmentMethod() {
+//		return fulfilmentMethod;
+//	}
+//
+//	public void setFulfilmentMethod(String fulfilmentMethod) {
+//		this.fulfilmentMethod = fulfilmentMethod;
+//	}
+//
+//	public String getFulfilmentProvider() {
+//		return fulfilmentProvider;
+//	}
+//
+//	public void setFulfilmentProvider(String fulfilmentProvider) {
+//		this.fulfilmentProvider = fulfilmentProvider;
+//	}
 
 	public Double getPackedQty() {
 		return packedQty;

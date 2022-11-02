@@ -39,6 +39,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(TggCustomException.class)
 	public ResponseEntity<Object> handleDefaultException(TggCustomException exception, WebRequest request) {
+    	exception.printStackTrace();
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getErrorMessage(),request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}

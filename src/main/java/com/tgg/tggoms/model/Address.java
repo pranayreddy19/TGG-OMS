@@ -20,14 +20,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
 @Table(name="address", schema="oms")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
 public class Address implements Serializable {
 	
 	/**
@@ -95,6 +94,7 @@ public class Address implements Serializable {
 	@Column(name = "detail", columnDefinition = "jsonb")
 	private Object detail;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Packages> packages;
 
